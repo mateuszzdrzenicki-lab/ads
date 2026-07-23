@@ -50,11 +50,22 @@ Solo project (owner + AI). Training/personal. Constraint: **€0 — no paid too
 - **Path (a) NOW:** tokenize only what shadcn already tokenizes — **color, radius, focus ring.** Sizing/spacing stay as Tailwind utilities for the slice.
 - **Path (b) LATER (additive, not a refactor):** define dimensional tokens in the same CSS-var + `@theme` structure and swap hardcoded utilities for generated ones. No brackets/hacks required. `LOCKED` as the intended upgrade path.
 
+### 4a. Repo scaffold — as built (Jul 2026)
+
+Confirmed on scaffold: Next.js 16.2.11, React 19.2.4, Tailwind v4 (`^4`, no `tailwind.config.js` — CSS-first), `cva` still the variant-map mechanism §3 assumes. Six things drifted from what §4/§5/§6c assumed, none of which changed the token bindings in §6b/§6c:
+
+- **shadcn now asks for a primitive-library choice** (Base UI / React Aria / Radix) that didn't exist when this doc was written. Took the CLI's recommended default, **Base UI** (`@base-ui/react`, not `@radix-ui/*`). Verified its native `<button>` respects the `disabled` attribute Tailwind's `disabled:` selectors need.
+- **A named style-preset system** (Nova/Vega/Maia/…/Custom) now sits in front of the old base-color prompt. Took **Nova** (Lucide + Geist) — moot for our colors since we override them, but it matches the Geist font `create-next-app` already wires into `layout.tsx`.
+- Stock primary hover is now `hover:bg-primary/80`, not `/90`. Doesn't change D1 (§6b) — we use neither — but the rationale text there cites the old fraction.
+- Stock outline hover moved from `accent` to `muted`/`foreground`. §7.1's "shadcn-faithful" label is now slightly stale phrasing; the actual §6c binding is unaffected since those classes are hand-authored regardless of stock defaults.
+- **Current shadcn has no literal `md` size key** (its scale is `default/xs/sm/lg/icon*`). Named our one size key `md` directly in code, per §3 ("shadcn is owned, not a live dependency").
+- **Dropped `focus-visible:border-ring`** from the copied-in base classes. Current stock shadcn swaps border color on focus; §6c's binding table keeps the border unchanged and only adds a ring, so the doc won over the stock default.
+
 ---
 
 ## 5. Button slice — LOCKED
 
-**Progress:** Step 3 (Figma authoring) **DONE & VERIFIED.** Primitive + semantic collections built as variables, Button designed and bound; pre-flight passed; both collections exported to JSON (native Figma export) and **alias integrity verified — 12/12 semantic tokens resolve to existing primitives** (§6d). Next: steps 4–5 (transform + repo scaffold) in the Claude Code thread.
+**Progress:** Steps 3–5 **DONE & VERIFIED.** Step 3 (Figma authoring): primitive + semantic collections built as variables, Button designed and bound; pre-flight passed; both collections exported to JSON (native Figma export) and **alias integrity verified — 12/12 semantic tokens resolve to existing primitives** (§6d). Steps 4–5 (repo scaffold, Style Dictionary transform, Button built + wired): done in the Claude Code repo/setup thread — see §4a, §7.2. **Figma-vs-code parity checked** via Figma MCP screenshot/metadata (§10) against all 8 variant×state combinations (`primary`/`outline` × `default`/`hover`/`focus`/`disabled`) — no discrepancies.
 
 **Known intentional divergence from stock shadcn:** primary hover uses an explicit `--primary-hover` token instead of `hover:bg-primary/90` (see §6b, D1).
 
@@ -69,7 +80,7 @@ Solo project (owner + AI). Training/personal. Constraint: **€0 — no paid too
 ## 6. Token naming — LOCKED
 
 - **Structured / nested naming** (not flat). Rationale: renaming later is a breaking change that ripples into Figma bindings + JSON keys + consumers; name right once.
-- **Consequence:** nested names ≠ shadcn's flat vars → a **Style Dictionary transform** is owed to flatten `color/primary/default → --primary`. Author clean; tool flattens. Setup at step 4/5. `OPEN` (not yet built).
+- **Consequence:** nested names ≠ shadcn's flat vars → a **Style Dictionary transform** is owed to flatten `color/primary/default → --primary`. Author clean; tool flattens. **Built** — see §7.2.
 
 ### 6a. Token spec — Primitives — AS BUILT (v0.7)
 
@@ -144,7 +155,7 @@ Two files, one per collection (`Value` = Primitives, `Light Mode` = Semantic). M
 | # | Decision | Options | Status |
 |---|---|---|---|
 | 7.1 | Outline hover treatment | **(i) LOCKED** — added `accent` + `accent-foreground` (source: new `neutral/100`) = 9 semantic tokens, shadcn-faithful. Code: `hover:bg-accent hover:text-accent-foreground`. | `LOCKED` |
-| 7.2 | Style Dictionary transform | Input format **inspected & verified** — see §6d. Build in the Claude Code thread. | `OPEN` (spec'd, not built) |
+| 7.2 | Style Dictionary transform | Input format inspected & verified (§6d). **Built as a hand-rolled, zero-dependency Node script** (`scripts/build-tokens.js`, not the `style-dictionary` package — the alias-resolve/color-object/unitless-number handling in §6d is custom either way, and a plain script is easier to hand-read at low coding experience). Resolves each semantic token via `$extensions.aliasData.targetVariableName` against the primitives file, flattens to §6b var names, writes them into `src/app/globals.css`. Re-run via `npm run tokens:build`; idempotent. | `LOCKED` (built & verified) |
 
 ---
 
@@ -202,6 +213,7 @@ Two files, one per collection (`Value` = Primitives, `Light Mode` = Semantic). M
 
 ## Changelog
 
+- **v0.8** — Steps 4–5 done: repo scaffolded (Next.js 16 + React 19 + Tailwind v4 + shadcn), Style Dictionary transform built as a zero-dependency script (§7.2), tokens wired into `globals.css`, Button built per §5/§6c and verified in-browser, then parity-checked against the Figma reference via MCP (§10) — no discrepancies across all 8 variant×state combinations. **New §4a** records six drifts surfaced by scaffolding against a current shadcn CLI, none of which changed §6b/§6c: shadcn now offers a primitive-library choice (took **Base UI** over Radix), a named style-preset system (took **Nova**), stock primary-hover opacity moved `/90→/80`, stock outline-hover moved `accent→muted`, no stock `md` size key exists (named ours directly), and `focus-visible:border-ring` was dropped from the copied-in base classes since §6c keeps the border unchanged on focus (ring-only), diverging from the current stock default.
 - **v0.7** — Tokens built & verified. **D1 LOCKED:** primary hover = explicit `--primary-hover` token (aliases `brand/400`), not an opacity modifier — Figma can't isolate fill opacity, and shadcn was already inconsistent (outline uses a token). **Naming convention LOCKED:** state is a sibling of `default` → `primary/hover`, not `primary/default-hover`. **D2 LOCKED:** `text/size/*` now alias `scale/350` (14px, added) + `scale/400`; unused until path (b). Semantic tier = **12 tokens**. §6a reconciled to as-built primitives (~189, incl. unused hues/scale/font). **New §6d:** verified Figma native export format — aliases resolved not referenced (live in `$extensions.aliasData`), color `$value` is an object, numbers unitless; 12/12 chains resolve by name. Figma naming cleanup done (lowercase, no spaces/parens).
 - **v0.6** — Step 3 (Figma authoring) marked DONE. **Token export path changed:** native Figma JSON export (per collection) replaces the planned free community plugin — one less dependency, still €0. REST API remains Enterprise-only/unavailable. §7.2 updated: transform must be written against Figma's native format, alias chains resolved.
 - **v0.5.1** — Housekeeping: renumbered sections so file order is sequential (MCP = §10, Working process = §11); §8 seat clarified as Full/Professional.
