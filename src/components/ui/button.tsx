@@ -17,7 +17,7 @@ const buttonVariants = cva(
           "border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        md: "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        md: "h-9 gap-2 px-4 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
       },
     },
     defaultVariants: {
