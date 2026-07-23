@@ -31,12 +31,12 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.7396000027656555,
-            0.415487676858902,
-            0.12039999663829803
+            0.7176470756530762,
+            0.37254902720451355,
+            0.05882352963089943
           ],
           "alpha": 1,
-          "hex": "#BD6A1F"
+          "hex": "#B75F0F"
         },
         "$extensions": {
           "com.figma.variableId": "VariableID:6:72",
@@ -214,12 +214,12 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8101961016654968,
-            0.5121446251869202,
-            0.24078431725502014
+            0.6270002126693726,
+            0.31607839465141296,
+            0.03300001099705696
           ],
           "alpha": 1,
-          "hex": "#CF833D"
+          "hex": "#A05108"
         },
         "$extensions": {
           "com.figma.variableId": "VariableID:5:29",
@@ -227,8 +227,8 @@
             "ALL_SCOPES"
           ],
           "com.figma.aliasData": {
-            "targetVariableId": "VariableID:2ccca4689f3efd9f09f15d8754876a0785f1918a/-1:-1",
-            "targetVariableName": "color/brand/500",
+            "targetVariableId": "VariableID:62ec6f9175e1c9de67f4ad5e18e094bcb22c45f8/-1:-1",
+            "targetVariableName": "color/brand/700",
             "targetVariableSetId": "VariableCollectionId:f01c1527c3f81e73040e98c234dcd0bfbc8cb663/-1:-1",
             "targetVariableSetName": "Primitives"
           }

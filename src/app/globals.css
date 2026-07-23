@@ -132,14 +132,14 @@
 /* BEGIN GENERATED TOKENS — do not hand-edit, run `npm run tokens:build` */
 :root {
   --primary: #A05108;
-  --primary-hover: #BD6A1F;
+  --primary-hover: #B75F0F;
   --primary-foreground: #FFFFFF;
   --background: #FFFFFF;
   --foreground: #2E2E2E;
   --border: #E1E1E1;
   --accent: #FAFAFA;
   --accent-foreground: #2E2E2E;
-  --ring: #CF833D;
+  --ring: #A05108;
   --radius: 8px;
 }
 
