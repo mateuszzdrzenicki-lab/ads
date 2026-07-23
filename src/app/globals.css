@@ -131,15 +131,15 @@
 
 /* BEGIN GENERATED TOKENS — do not hand-edit, run `npm run tokens:build` */
 :root {
-  --primary: #C68346;
-  --primary-hover: #D39E6F;
+  --primary: #A05108;
+  --primary-hover: #BD6A1F;
   --primary-foreground: #FFFFFF;
   --background: #FFFFFF;
   --foreground: #2E2E2E;
   --border: #E1E1E1;
   --accent: #FAFAFA;
   --accent-foreground: #2E2E2E;
-  --ring: #C68346;
+  --ring: #CF833D;
   --radius: 8px;
 }
 
