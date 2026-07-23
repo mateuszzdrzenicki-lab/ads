@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils"
 
 // Decorator slots (start/end) are plain children composition — no icon props (DS-Decision-Log §5).
 // Pass `data-icon="inline-start"` / `data-icon="inline-end"` on a decorator child to get the
-// matching inner padding via the has-data-[icon=...] selectors below.
+// matching inner padding via the has-data-[icon=...] selectors below. Full contract: docs/components/button.md.
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 focus-visible:ring-ring active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {

@@ -176,6 +176,7 @@ Two files, one per collection (`Value` = Primitives, `Light Mode` = Semantic). M
   - ⚠️ **Corrected (Jul 2026):** an earlier note here implied Figma AI integration was capture-only. Not true — see §10. Canvas *writing* is available; it's the **capture** flow specifically that stays parked.
 - **Figma Make ↔ repo connection:** parked (Path A first).
 - **Status color ramps** (`success` / `warning` / `destructive` / `info`): deferred. Add primitives + semantics when a component actually needs them (Alerts, destructive Button, etc.). Backbone (`brand` + `neutral`) built now.
+- **Dark mode: deleted, not deferred-in-code (Jul 2026).** The stock `.dark` block scaffolded by `create-next-app`/shadcn was never generated from Figma tokens — there is no dark-mode collection in the Figma export, only "Light Mode" — and nothing in the app applied the `.dark` class. Rather than keep it commented-out as "not yet wired up," it was deleted outright, since a "not generated" comment would have been permanently true, not temporarily true. **Revisit trigger:** a dark-mode collection actually authored in Figma — Figma is the token source of truth (§1), so dark mode doesn't get re-added in code speculatively ahead of that.
 
 ---
 
