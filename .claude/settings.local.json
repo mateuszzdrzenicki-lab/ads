@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__8e87c542-b9dc-40bc-bef5-df01851a7da6__whoami",
+      "Bash(python3 -c ' *)",
+      "Bash(npm -v)",
+      "Bash(npx -v)",
+      "Bash(git --version)",
+      "Bash(npx create-next-app@latest --help)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes)"
+    ]
+  }
+}
